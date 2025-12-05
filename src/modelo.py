@@ -56,12 +56,12 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 # TODO: Importa los modelos que necesites (KNN, DecisionTree, RandomForest, etc.)
 # from sklearn.neighbors import KNeighborsClassifier
 # from sklearn.tree import DecisionTreeClassifier
-# from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 
 # Configuracion de rutas
 RUTA_PROYECTO = Path(__file__).parent.parent
-RUTA_DATOS = RUTA_PROYECTO / "data" / "partidas.csv"
+RUTA_DATOS = RUTA_PROYECTO / "data" / "datos.csv"
 RUTA_MODELO = RUTA_PROYECTO / "models" / "modelo_entrenado.pkl"
 
 # Mapeo de jugadas a numeros (para el modelo)
@@ -78,27 +78,15 @@ PIERDE_CONTRA = {"piedra": "papel", "papel": "tijera", "tijera": "piedra"}
 # =============================================================================
 
 def cargar_datos(ruta_csv: str = None) -> pd.DataFrame:
-    """
-    Carga los datos del CSV de partidas.
 
-    TODO: Implementa esta funcion
-    - Usa pandas para leer el CSV
-    - Maneja el caso de que el archivo no exista
-    - Verifica que tenga las columnas necesarias
-
-    Args:
-        ruta_csv: Ruta al archivo CSV (usa RUTA_DATOS por defecto)
-
-    Returns:
-        DataFrame con los datos de las partidas
-    """
     if ruta_csv is None:
         ruta_csv = RUTA_DATOS
 
-    # TODO: Implementa la carga de datos
-    # Pista: usa pd.read_csv()
+    ruta_csv = Path(ruta_csv)
 
-    pass  # Elimina esta linea cuando implementes
+    dataFrame = pd.read_csv(ruta_csv)
+
+    return dataFrame
 
 
 def preparar_datos(df: pd.DataFrame) -> pd.DataFrame:
