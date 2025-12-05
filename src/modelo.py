@@ -78,7 +78,13 @@ PIERDE_CONTRA = {"piedra": "papel", "papel": "tijera", "tijera": "piedra"}
 # =============================================================================
 
 def cargar_datos(ruta_csv: str = None) -> pd.DataFrame:
+    """
+    Args:
+        ruta_csv: Ruta al archivo CSV (usa RUTA_DATOS por defecto)
 
+    Returns:
+        DataFrame con los datos de las partidas
+    """
     if ruta_csv is None:
         ruta_csv = RUTA_DATOS
 
