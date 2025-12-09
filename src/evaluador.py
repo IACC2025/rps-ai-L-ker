@@ -21,7 +21,7 @@ from pathlib import Path
 # Agregar el directorio src al path para importar modelo
 sys.path.insert(0, str(Path(__file__).parent))
 
-from modelo import JugadorIA, JUGADA_A_NUM, NUM_A_JUGADA, GANA_A
+from modelo import JugadorIA, JUGADA_A_NUM, NUM_A_JUGADA, GANA_A, RUTA_MODELO
 
 
 # Mapeo de entrada a jugada
@@ -129,17 +129,29 @@ def evaluar(num_rondas: int = 50):
     print(f"\nSe jugaran {num_rondas} rondas contra tu modelo de IA.")
     print("Juega de forma natural, como lo harias normalmente.\n")
 
+    # Verificar que existe el modelo
+    if not RUTA_MODELO.exists():
+        print(f"[!] ERROR: No se encuentra el modelo entrenado")
+        print(f"[!] Buscando en: {RUTA_MODELO}")
+        print(f"[!] Entrena tu modelo primero con: python src/modelo.py\n")
+        return
+
     # Intentar cargar el modelo
     try:
-        ia = JugadorIA()
+        print(f"[*] Cargando modelo desde: {RUTA_MODELO}")
+        ia = JugadorIA(ruta_modelo=str(RUTA_MODELO))
+        
         if ia.modelo is None:
-            print("[!] ADVERTENCIA: No se cargo ningun modelo.")
-            print("[!] La IA jugara de forma ALEATORIA.")
+            print("[!] ERROR: El modelo no se cargó correctamente.")
             print("[!] Entrena tu modelo primero con: python src/modelo.py\n")
+            return
+        
+        print("[*] Modelo cargado correctamente!\n")
+        
     except Exception as e:
         print(f"[!] Error al cargar el modelo: {e}")
-        print("[!] La IA jugara de forma ALEATORIA.\n")
-        ia = JugadorIA()
+        print("[!] Entrena tu modelo primero con: python src/modelo.py\n")
+        return
 
     input("Presiona ENTER para comenzar la evaluacion...")
 
