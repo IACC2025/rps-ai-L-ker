@@ -268,8 +268,15 @@ def entrenar_modelo(X, y, test_size: float = 0.2):
     print("EVALUACIÓN DE MODELOS")
     print("="*60)
 
+    pesos_train = np.linspace(0.5, 1.5, len(X_train))  # De 0.5 a 1.5
+
     for nombre, modelo in modelos.items():
-        modelo.fit(X_train, y_train)
+        # Entrenar con pesos (solo funciona con algunos modelos)
+        if nombre in ['DecisionTree', 'RandomForest']:
+            modelo.fit(X_train, y_train, sample_weight=pesos_train)
+        else:
+            modelo.fit(X_train, y_train)
+        
         y_pred = modelo.predict(X_test)
         acc = accuracy_score(y_test, y_pred)
         
@@ -448,6 +455,25 @@ class JugadorIA:
         if self.modelo is None:
             return np.random.choice(["piedra", "papel", "tijera"])
         
+        # Si hay suficiente historial reciente, analizar tendencias
+        if len(self.historial) >= 5:
+            # Últimas 5 jugadas del oponente
+            ultimas_5 = [h["jugada_j2"] for h in self.historial[-5:]]
+            
+            # Contar cada jugada
+            conteo = {
+                "piedra": ultimas_5.count("piedra"),
+                "papel": ultimas_5.count("papel"),
+                "tijera": ultimas_5.count("tijera")
+            }
+            
+            # Si hay una clara tendencia (3 o más de 5 = 60%+)
+            max_jugada = max(conteo, key=conteo.get)
+            if conteo[max_jugada] >= 3:
+                # Tendencia clara → predecir que seguirá
+                return max_jugada
+        
+        # Sin tendencia clara → usar el modelo
         features = self.obtener_features_actuales()
         prediccion_num = self.modelo.predict([features])[0]
         return NUM_A_JUGADA[prediccion_num]
