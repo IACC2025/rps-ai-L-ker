@@ -2,7 +2,7 @@
 RPSAI - Modelo de IA para Piedra, Papel o Tijera
 =================================================
 
-AVISO-NOTA:
+Reflexión:
 Tras muchas pruebas esta es mi versión definitiva pero me al parecerme un tanto vacía preferí incluir
 dentro elementos que había borrado para que vieses el trabajo que he tenido y se debe a lo siguiente.
 
@@ -13,7 +13,7 @@ y mucho ruido así que mi decisión final tras varias pruebas (cada version de l
 despues de hacer muchos cambios cuando llego a estar satisfecho con los avances) fue reducir en la
 medida de lo posible las features para evitar dichos problemas.
 
-Como reflexión siento que con las ideas que he tenido habría preferido mucho intentar
+Siento que con las ideas que he tenido habría preferido mucho intentar
 hacer un modelo general pero a la altura a la que me encontraba no me veía con el tiempo
 suficiente para intentar recolectar datos con suficiente calidad ya que cuanto más avanzaba
 en el desarrollo más pude ver el peso real que tienen estos datos sobre el modelo y la calidad de 
