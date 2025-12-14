@@ -1,0 +1,27 @@
+# Corrección Modo 2 - Revisión de Código
+## Lucas Pérez García
+
+### Recogida de datos (30%) - 9.5/10
+Excelente trabajo en esta sección. 308 rondas organizadas en 200 partidas, recogidas de forma metódica en 4-5 días con descansos cada 20 partidas para evitar fatiga. El CSV incluye estructura de partida/ronda que permite análisis más sofisticado. La documentación en DATOS.md es muy completa, incluyendo reflexiones críticas sobre la calidad de los datos y los problemas encontrados con datos de compañeros. IA específica para un oponente concreto (Victor Lacruz), lo cual es una decisión válida y bien justificada.
+
+### Feature Engineering (30%) - 9.5/10
+Trabajo sobresaliente. Lo más destacable no son solo las features implementadas, sino la reflexión sobre las que eliminaste y por qué:
+- Frecuencias generales y recientes (ventana de 5 jugadas)
+- Lag features reducidas a lag1 para evitar overfitting
+- Racha de misma jugada y detección de cambio
+
+La documentación inline explicando qué features probaste y por qué las descartaste (lag2, lag3, resultado anterior, empates, respuesta a jugadas específicas) demuestra un proceso de desarrollo iterativo y comprensión profunda del problema de overfitting. Esta reflexión es exactamente lo que se espera en un proyecto de ML.
+
+### Modelo (40%) - 9.5/10
+Implementación excelente con decisiones bien fundamentadas:
+- RandomForest con hiperparámetros ajustados (max_depth=10, class_weight='balanced')
+- Estrategia híbrida inteligente: 40% modelo ML, 30% counter frecuencias, 20% anti-patrón, 10% aleatorio
+- Uso de predict_proba para muestreo probabilístico en lugar de predicción determinística
+- Features de predicción perfectamente alineadas con las de entrenamiento
+- Análisis de distribución de clases para detectar desbalance
+
+La reflexión inicial del archivo sobre los problemas con el exceso de piedras en los datos y cómo afectaba al overfitting muestra madurez en el desarrollo de modelos ML.
+
+## NOTA MODO 2: 9.5/10
+
+*Nota: Trabajo excepcional. La combinación de buena documentación, reflexión crítica sobre el proceso de desarrollo, y decisiones técnicas bien fundamentadas hacen de este uno de los mejores proyectos entregados.*
